@@ -11,6 +11,10 @@ def menuOptions():
 
     print(menuValues)
 
+    menuAnswer=input()
+    if int(menuAnswer) ==1:
+        hR.getTickets()
+
 
 def main():
     welcomeMessage="""
@@ -18,7 +22,10 @@ def main():
     Type 'menu' to view the option or 'quit' to close the application
     """
     print(welcomeMessage)
+
+ 
     menuOptions()
+   
 
 
 
