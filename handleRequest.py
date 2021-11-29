@@ -1,18 +1,22 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+import base64
 import config
-with open('tickets.json') as f:
-  datas= json.load(f)
+
 
 URL="https://zcckry.zendesk.com/api/v2/tickets.json"
-URL2="https://zcckry.zendesk.com/api/v2/tickets/create_many"
-base64Token="{}".format(config.email, config.password)
-head = {'Authorization': 'Basic '}
-print(head)
+base64Token="{}:{}".format(config.email, config.password)
+base64Token_bytes = base64Token.encode("ascii") 
+base64_bytes = base64.b64encode(base64Token_bytes)
+base64_string = base64_bytes.decode("ascii")
+head = {'Authorization': 'Basic {}'.format(base64_string)}
+
 def getTickets():
-    response=requests.get(url=URL, headers=head)
-    print(response.json())
+    perpageLimit=25
+    response=requests.get(url="{}?per_page={}".format(URL,perpageLimit), headers=head)
+    
+
 
 
 
