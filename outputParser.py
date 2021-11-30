@@ -22,7 +22,7 @@ def dateParser(value):
 
 def outputParser(response, singleton,flag):
     if flag == 1:
-        ticketList = {1: {'s':'H'}}
+        ticketList = {}
         
         for idx, val in enumerate(response['tickets']):
             ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))

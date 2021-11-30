@@ -2,8 +2,12 @@ import requests
 import base64
 
 from requests.models import Response
+
+import aiohttp
+import asyncio
 import config
 import outputParser
+
 def Red(val): 
     print("\033[91m {}\033[00m" .format(val))
 def Yellow(val): 
@@ -17,24 +21,23 @@ base64_string = base64_bytes.decode("ascii")
 head = {'Authorization': 'Basic {}'.format(base64_string)}
 code="\x1B["
 
-def handleRequest(requestUR):
-    try:
-        response=requests.get(url=requestUR, headers=head)
-        response.raise_for_status()
-        return response
-    except requests.exceptions.Timeout:
-        print("Connection Timed Out. Please try again")
-    except requests.exceptions.HTTPError as errh:
-        if(response.status_code==404):
-            Red("Invalid Ticket ID, {}".format(errh))
-        elif(response.status_code==401):
-            Red("Authentication failed. Please check your credentials, {}".format(errh))
-        else:
-            Red("HTTP Error: {}".format(errh))
+
+async def fetch(session, url):
+    async with session.get(url) as resp:
+            data = await resp.json()
+            if resp.status == 200:
+                return data
+            else:
+                if resp.status==404:
+                    Red("Invalid Ticket ID, Error: {}".format(data['error']))
+                elif resp.status==401:
+                    Red("Authentication failed. Please check your credentials, Error: {}".format(data['error']))
+                else:
+                    Red("HTTP Error: {}".format(data))
         
-    except requests.exceptions.RequestException as e:
-        Red("It is not you. It is us. Please restart the application")
-        raise SystemExit(e)
+       
+
+            
 
 def printTicket(ticketList, flag,value=""):
     if flag == 1:
@@ -43,40 +46,61 @@ def printTicket(ticketList, flag,value=""):
             print("{}".format(v[1]))
     else:
         print("\n{}".format(value[1]))
-        Yellow("\nDescription:\n{} \n".format(value[2]))
+        Yellow("\nDescription:")
+        print(value[2],"\n")
 
 
-def getTickets(singleton, passedURL=""):
+async def getTickets(singleton, passedURL=""):
     perpageLimit=25
     if passedURL!="":
         requestURL=passedURL
     else:
         requestURL="{}/tickets.json?page[size]={}".format(URL,perpageLimit)
-    response=handleRequest(requestURL)
-    if response:
-        response=response.json()
-        if response['meta']['has_more']:
-            singleton.setHasMore(1,response['links']['next'],response['links']['next'])
-        else:
-            singleton.resetValue()
+    try:
+        async with aiohttp.ClientSession(headers=head) as session:
 
-        outputParser.outputParser(response,singleton,1)
-        printTicket(singleton.getTicketList(), 1)
+                    tasks = []
+                    
+                    tasks.append(asyncio.ensure_future(fetch(session, requestURL)))
 
-def getOneTicket(value, singleton):
+                    response = await asyncio.gather(*tasks)
+                    response=response[0]
+                    if response:
+                        
+
+                        if response['meta']['has_more']:
+                            singleton.setHasMore(1,response['links']['next'],response['links']['next'])
+                        else:
+                            singleton.resetValue()
+                        parsedResp=outputParser.outputParser(response,singleton,1)
+                        printTicket(singleton.getTicketList(),1,parsedResp)
+    except aiohttp.client_exceptions.ClientConnectorError as err:
+        print ("Connection Error, ",err)
+    
+
+async def getOneTicket(value, singleton):
     ticketL= singleton.getTicketList()
     value = int(value)
     if value in ticketL:
-        printTicket(ticketL,2,ticketL[value])
+         printTicket(ticketL,2,ticketL[value])
     else:
         requestURL="{}/tickets/{}.json".format(URL,value)
-       
-        response=handleRequest(requestURL)
-        if response:
-            response=response.json()
-            
-            parsedResp=outputParser.outputParser(response,singleton,2)
-            printTicket(ticketL,2,parsedResp)
+        try:
+            async with aiohttp.ClientSession(headers=head) as session:
+
+                    tasks = []
+                    
+                    tasks.append(asyncio.ensure_future(fetch(session, requestURL)))
+
+                    response = await asyncio.gather(*tasks)
+                    response=response[0]
+                    if response:
+                
+                        parsedResp=outputParser.outputParser(response,singleton,2)
+                        printTicket(ticketL,2,parsedResp)
+        except aiohttp.client_exceptions.ClientConnectorError as err:
+            print ("Connection Error, ",err)
+        
 
 
 
