@@ -16,14 +16,23 @@ def menuOptions():
             print(menuValues)
             menuAnswer=input()
             continue
-        elif int(menuAnswer) ==1:
+        elif menuAnswer =="1":
             hR.getTickets(sg)
-            print("Page {} of {}. Type 'n' to go to the next page".format(sg.getCurrPage(),sg.getTotalPage()))
-        elif int(menuAnswer )==2:
+            obj=sg.getHasMore()
+            if obj[0]==1:
+                print("Only showing 25 results. Type 'n' to go to the next page. Or,")
+
+        elif menuAnswer=="2":
             ticketValue=input("Please enter a ticket number: ")
             hR.getOneTicket(ticketValue,sg)
-        print(menuValues)
-        menuAnswer=input()
+        elif menuAnswer=="n" and obj[0]==1:
+            hR.getTickets(sg,obj[1])
+            obj=sg.getHasMore()
+            if obj[0]==1:
+                print("Only showing 25 results. Type 'n' to go to the next page. Or,")
+
+        menuAnswer=input("Type 'menu' to view the options or 'quit' to close the application: ")
+        
     print("Quitting. Thanks for using the Ticket Viewer")
 
 
@@ -31,7 +40,7 @@ def main():
 
     welcomeMessage="""
     Welcome to the Ticket Viewer
-    Type 'menu' to view the option or 'quit' to close the application
+    Type 'menu' to view the options or 'quit' to close the application
     """
     print(welcomeMessage)
 

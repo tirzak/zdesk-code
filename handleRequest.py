@@ -22,17 +22,27 @@ def handleRequest(requestUR):
 
 def printTicket(ticketList, flag,value=""):
     if flag == 1:
+        print("\n")
         for (k,v) in ticketList.items():
-            print("{}".format(v))
+            print("{}".format(v[1]))
     else:
-        print("\n{}".format(value))
+        print("\n{}".format(value[1]))
+        print("\nDescription:\n{} \n".format(value[2]))
 
 
-def getTickets(singleton):
+def getTickets(singleton, passedURL=""):
     perpageLimit=25
-    requestURL="{}/tickets.json?page[size]={}".format(URL,perpageLimit)
-    response=handleRequest(requestURL)
-    outputParser.outputParser(response.json(),singleton,1)
+    if passedURL!="":
+        requestURL=passedURL
+    else:
+        requestURL="{}/tickets.json?page[size]={}".format(URL,perpageLimit)
+    response=handleRequest(requestURL).json()
+    if response['meta']['has_more']:
+        singleton.setHasMore(1,response['links']['next'],response['links']['next'])
+    else:
+        singleton.resetValue()
+
+    outputParser.outputParser(response,singleton,1)
     printTicket(singleton.getTicketList(), 1)
 
 def getOneTicket(value, singleton):

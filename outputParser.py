@@ -22,14 +22,16 @@ def dateParser(value):
 
 def outputParser(response, singleton,flag):
     if flag == 1:
-        ticketList = singleton.getTicketList()
+        ticketList = {1: {'s':'H'}}
+        
         for idx, val in enumerate(response['tickets']):
-            ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(idx+1, val['subject'], val['requester_id'], dateParser(val['created_at']))
-            ticketList[idx+1]=ticketString
+            ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))
+            ticketList[val['id']]={1: ticketString,2:val['description']}
+            
         singleton.setTicketList(ticketList)
     
     else:
         val = response['ticket']
         ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))
-        return ticketString
+        return {1: ticketString,2:val['description']}
     
