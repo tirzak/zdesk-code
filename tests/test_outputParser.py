@@ -19,7 +19,7 @@ class TestHandleRequest(unittest.TestCase):
             }
             }
         result = outputParser.outputParser(x,2)
-        self.assertEqual(len(result),2)
+        self.assertEqual(len(result),3)
 
     #Test output parser with dict mimicking a list of tickets. Singleton should have a non empty dict
     def testOutputParserWithAnArray(self):
