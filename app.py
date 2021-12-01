@@ -14,7 +14,7 @@ def messages(parameter):
     if parameter == 1:
         Green("Page {}, only showing 25 results. Type 'n' to go to the next page. Or,".format(sg.getCurrPage()))
     elif parameter == 2:
-         Green("Page {}, only showing 25 results. Type 'n' to go to the next page, or type 'p' to go to the previous page. Or,".format(sg.getCurrPage()))
+         Green("Page {}, only showing 25 results. Type 'n' to go to the next page, or 'p' to go to the previous page. Or,".format(sg.getCurrPage()))
     elif parameter == 3:
          Green("Page {}, Type 'p' to go to the previous page. Or,".format(sg.getCurrPage()))
 
@@ -44,11 +44,10 @@ def menuOptions():
         obj=sg.getHasMore()
         if menuAnswer == 'menu':
             print(menuValues)
-            menuAnswer=input()
+            menuAnswer=input(" ")
             continue
         elif menuAnswer =='1':
             asyncio.run(hR.getTickets(sg))
-            booas=1
             handleOutput()
            
 
@@ -56,11 +55,11 @@ def menuOptions():
         elif menuAnswer=='2':
             Cyan('Please enter a ticket number:')
             ticketValue=input(' ')
-            if int(ticketValue)<0:
-                Red('Invalid Ticket Number. It should be greater than or equal to 0')
-            
-            else:
+                
+            if ticketValue.isnumeric():
                 asyncio.run(hR.getOneTicket(ticketValue,sg))
+            else:
+                Red('Incorrect Input')
         elif menuAnswer=='n' and obj[0]==1:
             asyncio.run(hR.getTickets(sg,obj[1]))
             sg.setCurrPage(sg.getCurrPage()+1)
