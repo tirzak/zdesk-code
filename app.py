@@ -1,7 +1,8 @@
 from src import handleRequest as hR
-from src import singleton
+from src.singleton import Ticket
 import asyncio
-sg = singleton.Singleton()
+#Initialize a singleton class
+sg = Ticket()
 def Red(val): 
     print('\033[91m {}\033[00m' .format(val))
 def Cyan(val): 

@@ -2,11 +2,14 @@ import base64
 import aiohttp
 import asyncio
 
+from src.singleton import Ticket
+
 from src import outputParser
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config import config 
+
 def Red(val): 
     print('\033[91m {}\033[00m' .format(val))
 def Yellow(val): 
@@ -49,8 +52,9 @@ def printTicket(ticketList, flag,value=''):
         print(value[2],'\n')
 
 
-async def getTickets(singleton, passedURL=''):
-    perpageLimit=1
+async def getTickets(single, passedURL=''):
+    sg=Ticket()
+    perpageLimit=25
     if passedURL!='':
         requestURL=passedURL
     else:
@@ -68,17 +72,18 @@ async def getTickets(singleton, passedURL=''):
                         
 
                         if response['meta']['has_more']:
-                            singleton.setHasMore(1,response['links']['next'],response['links']['prev'])
+                            sg.setHasMore(1,response['links']['next'],response['links']['prev'])
                         else:
-                            singleton.resetValue()
-                        parsedResp=outputParser.outputParser(response,singleton,1)
-                        printTicket(singleton.getTicketList(),1,parsedResp)
+                            sg.resetValue()
+                        parsedResp=outputParser.outputParser(response,1)
+                        printTicket(sg.getTicketList(),1,parsedResp)
     except aiohttp.client_exceptions.ClientConnectorError as err:
         print ('Connection Error, ',err)
     
 
-async def getOneTicket(value, singleton):
-    ticketL= singleton.getTicketList()
+async def getOneTicket(value, single):
+    sg=Ticket()
+    ticketL= sg.getTicketList()
     value = int(value)
     if value in ticketL:
          printTicket(ticketL,2,ticketL[value])
@@ -95,7 +100,7 @@ async def getOneTicket(value, singleton):
                     response=response[0]
                     if response:
                 
-                        parsedResp=outputParser.outputParser(response,singleton,2)
+                        parsedResp=outputParser.outputParser(response,2)
                         printTicket(ticketL,2,parsedResp)
                         return parsedResp
         except aiohttp.client_exceptions.ClientConnectorError as err:

@@ -1,5 +1,13 @@
-class Singleton:
-    def __init__(self) -> None:
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Ticket(metaclass=Singleton):
+    
+    def __init__(self):
         self._ticketList={}
         self._currPage=1
         self._morePage=0
@@ -24,6 +32,4 @@ class Singleton:
         self._morePage=0
     def isEmpty(self):
         return len(self._ticketList)==0
-
     
-        

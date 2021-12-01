@@ -22,7 +22,7 @@ Run `make init` in the terminal to install the required packages
 
 #### Step 3:
 
-Add your credentials and subdomain URL in `src/config.py` file
+Add your credentials and subdomain URL in `config/config.py` file
 
 #### Step 4:
 

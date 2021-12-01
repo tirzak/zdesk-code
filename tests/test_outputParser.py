@@ -1,10 +1,9 @@
 import unittest
-from src import singleton
+from src.singleton import Ticket
 from src import outputParser
 class TestHandleRequest(unittest.TestCase):
 
     def testOutputParserWithASingleDict(self):
-        sg=singleton.Singleton()
 
         x= {"ticket": {
                 "created_at": "2009-07-20T22:55:29Z",
@@ -18,11 +17,11 @@ class TestHandleRequest(unittest.TestCase):
                 "type": "incident"
             }
             }
-        result = outputParser.outputParser(x,sg,2)
+        result = outputParser.outputParser(x,2)
         self.assertEqual(len(result),2)
 
     def testOutputParserWithAnArray(self):
-        sg=singleton.Singleton()
+        sg=Ticket()
 
         x= {"tickets": [ {
                 "created_at": "2009-07-20T22:55:29Z",
@@ -36,7 +35,7 @@ class TestHandleRequest(unittest.TestCase):
                 "type": "incident"
             }]
             }
-        outputParser.outputParser(x,sg,1)
+        outputParser.outputParser(x,1)
         self.assertFalse(sg.isEmpty())
    
  

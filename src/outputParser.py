@@ -1,3 +1,6 @@
+from src.singleton import Ticket
+
+sg = Ticket()
 def getMonth(value):
     months = {1 : "January",
            2 : "February",
@@ -20,7 +23,7 @@ def dateParser(value):
     dateString = "{} {}, {}".format(getMonth(int(value[1])),value[2],value[0])
     return dateString
 
-def outputParser(response, singleton,flag):
+def outputParser(response, flag):
     if flag == 1:
         ticketList = {}
         
@@ -28,7 +31,7 @@ def outputParser(response, singleton,flag):
             ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))
             ticketList[val['id']]={1: ticketString,2:val['description']}
             
-        singleton.setTicketList(ticketList)
+        sg.setTicketList(ticketList)
     
     else:
         val = response['ticket']
