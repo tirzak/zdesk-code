@@ -24,7 +24,7 @@ Run `pip3 install -r requirements.txt -v` in a terminal to install the required 
 
 Add your credentials and subdomain URL in **config.py** file
 
-#### Step 3:
+#### Step 4:
 
 Run **app.py** to run the application 
 
@@ -33,7 +33,7 @@ Run **app.py** to run the application
 
 Files that contain tests have "test_" prefix. The project include tests for api calls and output parser
 
-Run `python -m unittest discover` in a terminal to run all tests
+Run `python3 -m unittest discover` in a terminal to run all tests
 
 
 
