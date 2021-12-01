@@ -54,6 +54,8 @@ def printTicket(ticketList, flag,value=''):
             print('{}'.format(v[1]))
     else:                               #else, print the dict values
         print('\n{}'.format(value[1]))
+        Yellow('\nStatus: {}')
+        print(value[3])
         Yellow('\nDescription:')
         print(value[2],'\n')
 

@@ -31,12 +31,12 @@ def outputParser(response, flag):
         
         for idx, val in enumerate(response['tickets']):
             ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))
-            ticketList[val['id']]={1: ticketString,2:val['description']}
+            ticketList[val['id']]={1: ticketString,2:val['description'],3:val['status'].title()}
             
         sg.setTicketList(ticketList)
     
     else:
         val = response['ticket']
         ticketString = "{}) Ticket with subject '{}' opened by {} on {}".format(val['id'], val['subject'], val['requester_id'], dateParser(val['created_at']))
-        return {1: ticketString,2:val['description']}
+        return {1: ticketString,2:val['description'],3:val['status'].title()}
     
