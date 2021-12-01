@@ -73,8 +73,10 @@ async def getTickets(single, passedURL=''):
 
                         if response['meta']['has_more']:
                             sg.setHasMore(1,response['links']['next'],response['links']['prev'])
-                        else:
-                            sg.resetValue()
+                        elif not response['meta']['has_more'] and sg.getCurrPage()>1:
+                            sg.setHasMore(0,prevURL=response['links']['prev'])
+                        # else:
+                        #     sg.resetValue()
                         parsedResp=outputParser.outputParser(response,1)
                         printTicket(sg.getTicketList(),1,parsedResp)
     except aiohttp.client_exceptions.ClientConnectorError as err:

@@ -25,9 +25,9 @@ class Ticket(metaclass=Singleton):
         return [self._morePage,self._next,self._prev]
     def setHasMore(self,value,nextURL="",prevURL=""):
         self._morePage=value
-        if value==1:
-            self._next=nextURL
-            self._prev=prevURL
+        
+        self._next=nextURL
+        self._prev=prevURL
     def resetValue(self):
         self._morePage=0
     def isEmpty(self):
