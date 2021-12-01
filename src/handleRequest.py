@@ -97,7 +97,7 @@ async def getOneTicket(value, single):
     seconds = time.time()
     timeStamp = sg.getTimeStamp()
     diff = seconds-timeStamp
-    #If the ticket was received in a getAllTicket() call, return it immediately.
+    #If the ticket was received in a getAllTicket() call, return it from cache.
     #If it has been more than 45 seconds, skip cache
     if value in ticketL and diff < 45:
          printTicket(ticketL,2,ticketL[value])

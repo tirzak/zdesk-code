@@ -6,20 +6,25 @@ import io
 import sys
 
 class TestHandleRequest(unittest.TestCase):
-    def testOneTicketWithCorrectTicketID(self):
+    #Test with correct ticket ID. Should receive a dict with 2 values
+    def testOneTicketWithCorrectTicketID(self): 
         sg=Ticket()   
         capturedOutput = io.StringIO()                 
         sys.stdout = capturedOutput                
         test=asyncio.run(handleRequest.getOneTicket(56,sg))
         sys.stdout = sys.__stdout__   
         self.assertNotEqual(len(test),0)  
+
+    #Test with Incorrect ticket ID. Should receive nothing
     def testOneTicketWithIncorrectTicketID(self):
         sg=Ticket()       
         capturedOutput = io.StringIO()                 
         sys.stdout = capturedOutput                
         test=asyncio.run(handleRequest.getOneTicket(-22,sg))
         sys.stdout = sys.__stdout__   
-        self.assertEqual(test,None)  
+        self.assertEqual(test,None) 
+        
+    #Test all ticket function. Singleton should have a non empty dict
     def testAllTicket(self):
         sg=Ticket()
         capturedOutput = io.StringIO()                 

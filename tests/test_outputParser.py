@@ -3,6 +3,7 @@ from src.singleton import Ticket
 from src import outputParser
 class TestHandleRequest(unittest.TestCase):
 
+    #Test output parser with a single dict mimicking a ticket object. Should receive a dict with 2 values
     def testOutputParserWithASingleDict(self):
 
         x= {"ticket": {
@@ -20,6 +21,7 @@ class TestHandleRequest(unittest.TestCase):
         result = outputParser.outputParser(x,2)
         self.assertEqual(len(result),2)
 
+    #Test output parser with dict mimicking a list of tickets. Singleton should have a non empty dict
     def testOutputParserWithAnArray(self):
         sg=Ticket()
 
