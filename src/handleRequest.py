@@ -1,9 +1,12 @@
 import base64
 import aiohttp
 import asyncio
-import config 
-from src import outputParser
 
+from src import outputParser
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from config import config 
 def Red(val): 
     print('\033[91m {}\033[00m' .format(val))
 def Yellow(val): 
