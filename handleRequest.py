@@ -1,8 +1,4 @@
-import requests
 import base64
-
-from requests.models import Response
-
 import aiohttp
 import asyncio
 import config
@@ -98,6 +94,7 @@ async def getOneTicket(value, singleton):
                 
                         parsedResp=outputParser.outputParser(response,singleton,2)
                         printTicket(ticketL,2,parsedResp)
+                        return parsedResp
         except aiohttp.client_exceptions.ClientConnectorError as err:
             print ("Connection Error, ",err)
         

@@ -22,7 +22,8 @@ class Singleton:
             self._prevURL=prevURL
     def resetValue(self):
         self._totalPage=0
-  
+    def isEmpty(self):
+        return len(self._ticketList)==0
 
     
         

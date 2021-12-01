@@ -1,6 +1,5 @@
 import handleRequest as hR
 import singleton
-import aiohttp
 import asyncio
 sg = singleton.Singleton()
 def Red(val): 
@@ -36,7 +35,11 @@ def menuOptions():
         elif menuAnswer=="2":
             Cyan("Please enter a ticket number:")
             ticketValue=input(" ")
-            asyncio.run(hR.getOneTicket(ticketValue,sg))
+            if int(ticketValue)<0:
+                Red("Invalid Ticket Number. It should be greater than or equal to 0")
+            
+            else:
+                asyncio.run(hR.getOneTicket(ticketValue,sg))
         elif menuAnswer=="n" and obj[0]==1:
             asyncio.run(hR.getTickets(sg,obj[1]))
             obj=sg.getHasMore()
