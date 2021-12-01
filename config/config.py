@@ -2,4 +2,4 @@
 #Add your credentials inside the double quote. The credentials below should work as well
 subdomain="zcckry.zendesk.com"
 email="test@test.com"
-token="5vSbGNVIylrHP1fXf12NIVY3PAJNKJH5SGXokoij"
+token=""
