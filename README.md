@@ -20,7 +20,7 @@ Contents
 ### Get all Tickets
 To show all tickets, it makes a call to Zendesk API for 25 tickets. Users can page through tickets if there are more than 25 tickets.
 ### Get only one ticket 
- When a user wants to view a single ticket, it first checks whether this ticket was received in the last api call to fetch 25 tickets. If it is in the cache; and it has been less than 45 seconds since cache update, it returns the ticket from cache. Tickets get updated frequently, so 45 seconds is a reasonable time frame. Else, it makes the api call to fetch the ticket information
+ When a user wants to view a single ticket, it first checks whether this ticket was received in the last api call to fetch 25 tickets. If it is in the cache; and it has been less than 45 seconds since cache update, it returns the ticket from cache. Tickets get updated frequently, so 45 seconds is a reasonable time frame. Else, it makes the api call to fetch the ticket information.
 ## Instructions
 
 ### Environment requirements
@@ -40,7 +40,7 @@ Run `make init` in the terminal to install the required packages
 
 #### Step 3:
 
-Add your credentials and subdomain URL in `config/config.py` file
+Update the credentials and subdomain URL in `config/config.py` file
 
 #### Step 4:
 
