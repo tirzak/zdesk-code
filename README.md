@@ -21,7 +21,7 @@ Add your credentials and subdomain URL in **config.py** file
 
 #### Step 3:
 
-Run **app.py** run the application 
+Run **app.py** to run the application 
 
 
 ### Tests
