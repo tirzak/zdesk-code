@@ -1,11 +1,6 @@
 import unittest
-import handleRequest
-import singleton
-import asyncio
-import io
-import sys
-import json
-import outputParser
+from src import singleton
+from src import outputParser
 class TestHandleRequest(unittest.TestCase):
 
     def testOutputParserWithASingleDict(self):

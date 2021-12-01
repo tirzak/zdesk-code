@@ -1,10 +1,9 @@
 import unittest
-import handleRequest
-import singleton
+from src import handleRequest
+from src import singleton
 import asyncio
 import io
 import sys
-
 
 class TestHandleRequest(unittest.TestCase):
 
@@ -15,14 +14,14 @@ class TestHandleRequest(unittest.TestCase):
         asyncio.run(handleRequest.getTickets(sg))                  
         sys.stdout = sys.__stdout__     
         self.assertFalse(sg.isEmpty())
-    def testOneTicketWithCorrectID(self):
+    def testOneTicketWithCorrectTicketID(self):
         sg=singleton.Singleton()         
         capturedOutput = io.StringIO()                 
         sys.stdout = capturedOutput                
         test=asyncio.run(handleRequest.getOneTicket(1,sg))
         sys.stdout = sys.__stdout__   
         self.assertNotEqual(len(test),0)  
-    def testOneTicketWithIncorrectID(self):
+    def testOneTicketWithIncorrectTicketID(self):
         sg=singleton.Singleton()         
         capturedOutput = io.StringIO()                 
         sys.stdout = capturedOutput                
