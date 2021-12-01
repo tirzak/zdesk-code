@@ -9,7 +9,7 @@ def Red(val):
 def Yellow(val): 
     print("\033[93m {}\033[00m" .format(val))
 
-URL="https://zcckry.zendesk.com/api/v2"
+URL="https://{}/api/v2".format(config.subdomain)
 base64Token="{}:{}".format(config.email, config.password)
 base64Token_bytes = base64Token.encode("ascii") 
 base64_bytes = base64.b64encode(base64Token_bytes)
@@ -65,7 +65,7 @@ async def getTickets(singleton, passedURL=""):
                         
 
                         if response['meta']['has_more']:
-                            singleton.setHasMore(1,response['links']['next'],response['links']['next'])
+                            singleton.setHasMore(1,response['links']['next'],response['links']['prev'])
                         else:
                             singleton.resetValue()
                         parsedResp=outputParser.outputParser(response,singleton,1)
