@@ -11,6 +11,7 @@ def Cyan(val):
 def Green(val): 
     print('\033[92m {}\033[00m' .format(val))
 
+#This function prints a message based on the parameter
 def messages(parameter):
     if parameter == 1:
         Green("Page {}, only showing 25 results. Type 'n' to go to the next page. Or,".format(sg.getCurrPage()))
@@ -19,6 +20,7 @@ def messages(parameter):
     elif parameter == 3:
          Green("Page {}, Type 'p' to go to the previous page. Or,".format(sg.getCurrPage()))
 
+#This function handles the output message logic 
 def handleOutput():
     obj=sg.getHasMore()
     if obj[0]==1 and sg.getCurrPage()==1:
@@ -48,7 +50,7 @@ def menuOptions():
             menuAnswer=input(" ")
             continue
         elif menuAnswer =='1':
-            asyncio.run(hR.getTickets(sg))
+            asyncio.run(hR.getTickets(sg)) #async call to getTicket
             handleOutput()
            
 
@@ -61,12 +63,13 @@ def menuOptions():
                 asyncio.run(hR.getOneTicket(ticketValue,sg))
             else:
                 Red('Incorrect Input')
-        elif menuAnswer=='n' and obj[0]==1:
+            
+        elif menuAnswer=='n' and obj[0]==1: #allow going to the next page only if there is  more
             asyncio.run(hR.getTickets(sg,obj[1]))
             sg.setCurrPage(sg.getCurrPage()+1)
             handleOutput()
 
-        elif menuAnswer=='p' and obj[2]!='' and sg.getCurrPage()!=1:
+        elif menuAnswer=='p' and obj[2]!='' and sg.getCurrPage()!=1: #allow going back only if you have a previous page
              asyncio.run(hR.getTickets(sg,obj[2]))
              sg.setCurrPage(sg.getCurrPage()-1)
              handleOutput()

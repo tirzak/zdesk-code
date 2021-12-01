@@ -1,6 +1,7 @@
 from src.singleton import Ticket
 
 sg = Ticket()
+#This function returns month from an integer
 def getMonth(value):
     months = {1 : "January",
            2 : "February",
@@ -23,6 +24,7 @@ def dateParser(value):
     dateString = "{} {}, {}".format(getMonth(int(value[1])),value[2],value[0])
     return dateString
 
+#This function parses a json and either returns a dict or stores a dict of dicts in the singleton class
 def outputParser(response, flag):
     if flag == 1:
         ticketList = {}

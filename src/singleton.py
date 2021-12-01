@@ -1,3 +1,4 @@
+#Using singleton pattern to hold global variables
 class Singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
@@ -13,6 +14,7 @@ class Ticket(metaclass=Singleton):
         self._morePage=0
         self._next=""
         self._prev=""
+        self._timeStamp=0
     def setTicketList(self,ticketList):
         self._ticketList=ticketList
     def getTicketList(self):
@@ -32,4 +34,8 @@ class Ticket(metaclass=Singleton):
         self._morePage=0
     def isEmpty(self):
         return len(self._ticketList)==0
+    def setTimeStamp(self,timeStamp):
+        self._timeStamp=timeStamp
+    def getTimeStamp(self):
+        return self._timeStamp
     
