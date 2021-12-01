@@ -3,13 +3,9 @@ import aiohttp
 import asyncio
 
 from src.singleton import Ticket
-
 from src import outputParser
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config import config 
-
+sg=Ticket()
 def Red(val): 
     print('\033[91m {}\033[00m' .format(val))
 def Yellow(val): 
@@ -53,7 +49,6 @@ def printTicket(ticketList, flag,value=''):
 
 
 async def getTickets(single, passedURL=''):
-    sg=Ticket()
     perpageLimit=25
     if passedURL!='':
         requestURL=passedURL
@@ -84,7 +79,6 @@ async def getTickets(single, passedURL=''):
     
 
 async def getOneTicket(value, single):
-    sg=Ticket()
     ticketL= sg.getTicketList()
     value = int(value)
     if value in ticketL:

@@ -1,6 +1,7 @@
 from src import handleRequest as hR
 from src.singleton import Ticket
 import asyncio
+
 #Initialize a singleton class
 sg = Ticket()
 def Red(val): 
