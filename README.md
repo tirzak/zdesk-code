@@ -5,9 +5,10 @@ This is a tool to view your Zendesk tickets. The application is written in **pyt
 
 ## Instructions
 
-### Environment equirements
+### Environment requirements
 
 1. Python3
+2. Terminal (Unix shells recommended)
 
 ### Running the application
 
