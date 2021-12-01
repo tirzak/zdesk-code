@@ -28,7 +28,7 @@ Add your credentials and subdomain URL in **config.py** file
 Run **app.py** to run the application 
 
 
-### Tests
+## Tests
 
 Files that contain tests have "test_" prefix. The project include tests for api calls and output parser
 
