@@ -46,6 +46,8 @@ def menuOptions():
     while menuAnswer != 'quit':
         obj=sg.getHasMore()
         if menuAnswer == 'menu':
+            if inView is True:
+                inView=False
             print(menuValues)
             menuAnswer=input(" ")
             continue
