@@ -57,7 +57,10 @@ def printTicket(ticketList, flag,value=''):
 
 #This function prints a list of 25 tickets. It is asynchronous to avoid blocking in case of multiple api calls
 async def getTickets(single, passedURL=''):
-    perpageLimit=25
+    #Only getting 25 tickets to save memory and bandwidth. 
+    # Fetching all tickets would be a waste as the user can only see 25 tickets at most, and they might not go all the way
+    
+    perpageLimit=25 
     if passedURL!='':
         requestURL=passedURL
     else:
