@@ -19,8 +19,10 @@ Contents
 
 ### Authentication
 The application uses OAuth2 access token for authentication. The token's scope is read-only. 
+
 ### Get all tickets
 To show all tickets, it makes a call to Zendesk API for 25 tickets; the response from the api is stored into a data structure in a singleton class. Users can page through tickets if there are more than 25 tickets. The application uses cursor pagination.
+
 ### Get a single ticket details
  When a user wants to view a single ticket, it first checks whether this ticket was received in the last api call to fetch 25 tickets. If it is in the cache(Singleton's data structure); and it has been less than 45 seconds since cache update, it returns the ticket from cache. Tickets get updated frequently, so 45 seconds is a reasonable time frame. Else, it makes the api call to fetch the ticket information.
 ## Instructions
@@ -34,11 +36,15 @@ To show all tickets, it makes a call to Zendesk API for 25 tickets; the response
 
 #### Step 1:
 
-Clone the project. It is recommended that you set up a virtual environment after cloning the repo.
+Clone the project. 
 
 #### Step 2:
 
-Run `make init` in the terminal to install therequired packages.
+Open a terminal in the repo directory. It is recommended that you set up a virtual environment after opening the terminal.
+
+#### Step 3:
+
+Run `make init` in the terminal to install the required packages.
 
 #### Step 3 (Optional):
 
@@ -51,9 +57,9 @@ Run `make run` in the terminal to start the application.
 
 ## Tests
 
-Files that contain tests have "test_" prefix. The project include tests for api calls and output parser.
+Tests are included in the tests directory. The project include tests for api calls, output parser, and singleton class.
 
-Run `make test` in a terminal to run all tests.
+Run `make test` in the terminal to run all tests.
 
 
 
