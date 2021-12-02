@@ -26,7 +26,6 @@ base64Token_bytes = base64Token.encode('ascii')
 base64_bytes = base64.b64encode(base64Token_bytes)
 base64_string = base64_bytes.decode('ascii')
 head = {'Authorization': 'Basic {}'.format(base64_string)} #header
-print(base64Token)
 
 
 #The method fetches data for a given URL
@@ -52,7 +51,7 @@ def printTicket(ticketList, flag,value=''):
     if flag == 1:
         print('\n')
         for (k,v) in ticketList.items():
-            print('{}'.format(v[1]))
+            print('{} \033[93m Status: \033[00m {}'.format(v[1],v[3].title()))
     else:                               #else, print the dict values
         print('\n{}'.format(value[1]))
         Yellow('\nStatus: ')
