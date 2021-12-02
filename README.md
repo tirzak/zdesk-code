@@ -5,10 +5,10 @@ This is a tool to view your Zendesk tickets. The application is written in **pyt
 
 Contents
 
-1. [What can it do](#What-can-it-do)
-2. [How does it work](#How-does-it-work)
-3. [Instructions](##Instructions)
-4. [Tests](##Tests)
+1. [What can it do](#what-can-it-do)
+2. [How does it work](#how-does-it-work)
+3. [Instructions](#instructions)
+4. [Tests](#tests)
 
 ## What can it do
 
