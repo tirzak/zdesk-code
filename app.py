@@ -10,7 +10,8 @@ def Cyan(val):
     print('\033[96m {}\033[00m' .format(val))
 def Green(val): 
     print('\033[92m {}\033[00m' .format(val))
-inView=False
+
+
 #This function prints a message based on the parameter
 def messages(parameter):
     if parameter == 1:
@@ -34,6 +35,7 @@ def handleOutput():
 
 
 def menuOptions():
+    inView=False #To control input when the TicketList is not in focus
     menuValues='''
     Select View Options:
         a) Type 1 to view all tickets
@@ -46,7 +48,7 @@ def menuOptions():
     while menuAnswer != 'quit':
         obj=sg.getHasMore()
         if menuAnswer == 'menu':
-            if inView is True:
+            if inView==True:
                 inView=False
             print(menuValues)
             menuAnswer=input(" ")
@@ -61,7 +63,7 @@ def menuOptions():
 
         elif menuAnswer=='2':
             if inView is True:
-                inView=False
+                 inView=False
             Cyan('Please enter a ticket number:')
             ticketValue=input(' ')
                 
