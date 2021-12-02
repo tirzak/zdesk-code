@@ -46,11 +46,11 @@ Open a terminal in the repo directory. It is recommended that you set up a virtu
 
 Run `make init` in the terminal to install the required packages.
 
-#### Step 3 (Optional):
+#### Step 4 (Optional):
 
 Update the credentials and subdomain URL in `config/config.py` file.
 
-#### Step 4:
+#### Step 5:
 
 Run `make run` in the terminal to start the application.
 
