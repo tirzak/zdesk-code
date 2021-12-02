@@ -21,7 +21,7 @@ def Yellow(val):
 URL='https://{}/api/v2'.format(config.subdomain)
 
 #Encode user credentials in base64
-base64Token='{}/token:{}'.format(config.email, config.token)
+base64Token='{}/token:{}'.format(config.email, config.apiToken)
 base64Token_bytes = base64Token.encode('ascii') 
 base64_bytes = base64.b64encode(base64Token_bytes)
 base64_string = base64_bytes.decode('ascii')
