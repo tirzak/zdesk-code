@@ -22,7 +22,7 @@ The application uses OAuth2 access token for authentication. The token's scope i
 ### Get all tickets
 To show all tickets, it makes a call to Zendesk API for 25 tickets; the response from the api is stored into a data structure in a singleton class. Users can page through tickets if there are more than 25 tickets. The application uses cursor pagination.
 ### Get a single ticket details
- When a user wants to view a single ticket, it first checks whether this ticket was received in the last api call to fetch 25 tickets. If it is in the cache; and it has been less than 45 seconds since cache update, it returns the ticket from cache. Tickets get updated frequently, so 45 seconds is a reasonable time frame. Else, it makes the api call to fetch the ticket information.
+ When a user wants to view a single ticket, it first checks whether this ticket was received in the last api call to fetch 25 tickets. If it is in the cache (Singleton's data structure); and it has been less than 45 seconds since cache update, it returns the ticket from cache. Tickets get updated frequently, so 45 seconds is a reasonable time frame. Else, it makes the api call to fetch the ticket information.
 ## Instructions
 
 ### Environment requirements
